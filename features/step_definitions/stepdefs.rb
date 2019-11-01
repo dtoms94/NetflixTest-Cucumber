@@ -2,7 +2,6 @@ require "watir"
 require "rspec/expectations"
 
 Given("I am on the Google Search Page") do
-  @browser ||= Watir::Browser.new
   @browser.goto "https://www.google.com"
 end
 
@@ -23,5 +22,4 @@ Then("I should see the homepage") do
   @browser.g(id: "netflix-logo").wait_until(&:present?)
   expect(@browser.url).to eq("https://www.netflix.com/")
   puts "You are on the Netflix homepage: #{@browser.url}"
-  @browser.close
 end
