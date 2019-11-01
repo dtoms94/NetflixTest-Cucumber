@@ -67,10 +67,10 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber (~> 3.1.0)
-  ffi
-  page-object
+  ffi (~> 1.11.1)
+  page-object (~> 2.2.6)
   rspec (~> 3.7.0)
-  watir
+  watir (~> 6.16.5)
 
 BUNDLED WITH
    1.17.2
