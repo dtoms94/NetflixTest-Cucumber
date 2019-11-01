@@ -1,4 +1,4 @@
-require "watir"
+require 'watir'
 
 Before do
   @browser ||= Watir::Browser.new
