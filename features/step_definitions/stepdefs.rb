@@ -21,7 +21,7 @@ end
 
 Then("I should see the homepage") do
   @browser.g(id: "netflix-logo").wait_until(&:present?)
-  @browser.url == "https://www.netflix.com/"
+  expect(@browser.url).to eq("https://www.netflix.com/")
   puts "You are on the Netflix homepage: #{@browser.url}"
   @browser.close
 end
