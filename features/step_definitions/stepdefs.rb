@@ -23,4 +23,9 @@ Then("I should see the homepage") do
   on_page(NetflixHome).netflix_logo_element.wait_until(&:present?)
   expect(@browser.url).to eq(on_page(NetflixHome).netflix_url)
   puts "You are on the Netflix homepage: #{@browser.url}"
+  on_page(NetflixHome).sign_in_button
+  on_page(NetflixLogin).login_form_element.wait_until(&:present?)
+  expect(@browser.url).to eq(on_page(NetflixLogin).login_url)
+  puts "You are on the Netflix Sign In page: #{@browser.url}"
+
 end
