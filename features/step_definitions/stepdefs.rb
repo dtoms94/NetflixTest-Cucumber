@@ -1,24 +1,26 @@
 require 'rspec/expectations'
 
+World PageObject::PageFactory
+
 Given("I am on the Google Search Page") do
-  @browser.goto "https://www.google.com"
+  on_page(GoogleSearch).visit_google_search
 end
 
 Given("I search for {string}") do |string|
-  @browser.text_field(name: 'q').set string
-  @browser.button(name: 'btnK').click
+  on_page(GoogleSearch).search_box = string
+  on_page(GoogleSearch).search_button
 end
 
 Given("I see results") do
-  @browser.div(id: 'resultStats').wait_until(&:present?)
+  on_page(GoogleSearch).search_results_element.wait_until(&:present?)
 end
 
 When("I click the link") do
-  @browser.a(href: 'https://www.netflix.com/').click
+  on_page(GoogleSearch).result_link
 end
 
 Then("I should see the homepage") do
-  @browser.g(id: 'netflix-logo').wait_until(&:present?)
-  expect(@browser.url).to eq('https://www.netflix.com/')
+  on_page(NetflixHome).netflix_logo_element.wait_until(&:present?)
+  expect(@browser.url).to eq(on_page(NetflixHome).netflix_url)
   puts "You are on the Netflix homepage: #{@browser.url}"
 end
