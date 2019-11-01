@@ -3,8 +3,6 @@ require 'rspec/expectations'
 World PageObject::PageFactory
 
 Given("I am on the Google Search Page") do
-  @google_search = GoogleSearch.new(@browser)
-  @netflix_home = NetflixHome.new(@browser)
   on_page(GoogleSearch).visit_google_search
 end
 
