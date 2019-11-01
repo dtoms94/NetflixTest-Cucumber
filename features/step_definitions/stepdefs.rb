@@ -1,25 +1,26 @@
-require "watir"
-require "rspec/expectations"
+require 'rspec/expectations'
 
 Given("I am on the Google Search Page") do
-  @browser.goto "https://www.google.com"
+  @google_search = GoogleSearch.new(@browser)
+  @netflix_home = NetflixHome.new(@browser)
+  @google_search.visit_google_search
 end
 
 Given("I search for {string}") do |string|
-  @browser.text_field(name: "q").set string
-  @browser.button(name: "btnK").click
+  @google_search.enter_search_keyword(string)
+  @google_search.click_search_button
 end
 
 Given("I see results") do
-  @browser.div(id: "resultStats").wait_until(&:present?)
+  @google_search.wait_for_results
 end
 
 When("I click the link") do
-  @browser.a(href: "https://www.netflix.com/").click
+  @google_search.click_link(@netflix_home.netflix_url)
 end
 
 Then("I should see the homepage") do
-  @browser.g(id: "netflix-logo").wait_until(&:present?)
-  expect(@browser.url).to eq("https://www.netflix.com/")
+  @netflix_home.wait_for_page
+  expect(@browser.url).to eq(@netflix_home.netflix_url)
   puts "You are on the Netflix homepage: #{@browser.url}"
 end
